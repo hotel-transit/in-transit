@@ -1,0 +1,9 @@
+.ui.text.container
+  fieldset
+    legend: h1 Browse
+    .ui.list
+    each file in filelist
+      .item
+        i.icon.download
+        a(href='/user-uploads/' + file.name)=file.name
+        |  / #{file.size}

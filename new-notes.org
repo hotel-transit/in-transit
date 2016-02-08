@@ -1,0 +1,15 @@
+* FUNCTIONALITY
+1. Decide what will happen with the files (no tiddlers - what then?), fix the function.
+2. Improve the keyword collection, add more fields. Maybe make the files array an array of objects... Or maybe delete the collection keywords and make a collection uploadedfiles or something... Fileds: filename, (maybe type), description, keywords[]... Think about it - and what about sounds?
+3. Limit upload size
+4. Use query strings to keep track of active tab and display upload messages. It will be useful and for the story-making.
+
+* INTERFACE
+1. [DONE] Use a tab menu and divide chatroom and upload form. Work on each page separately. Tabs will be: Chatroom, Upload a file, Show (or/and Download).
+2. [DONE] Make the buttons look better.
+3. Search alternate themes for semantic UI
+4. Interface for show (maybe check lialina)
+
+* GENERAL THOUGHTS
+1. The project has to do with narration. We need a better way to connect text with optical material and sound. Search for phrases with a certain keyword in all text and associate them with the material.
+2. Use the description of each file and make a list of phrases associated with each description. Store it in a database and use it to make it randomly display in the chat.

@@ -1,0 +1,29 @@
+* IN-TRANSIT PROJECT
+
+Work in progress...
+
+*** DATABASE
+
+The =in-transit= database contains two collections: =keywords= and =files=
+
+The =keywords= collection has keywords as its primary field. It also contain an array of filenames and an array of descriptions.
+
+The =files= collection has filenames as its primary field. It also has a field for description, an array of keywords, type and author.
+
+*** INTERFACE
+
+The project consists of three separate interfaces: Upload, Chat and Browse.
+
+**** UPLOAD
+
+Used to populate the databases. It consists of an upload form, with fields for comments and user-defined keywords. It produces a list of existing keywords to select from. The user can upload any file he/she wants, but only valid files will be added to the site content. The rest of the files will just be available in a downloads page. Valid files are: images (jpeg), audio (mp3 or wav) and video. Also text, through the =comments= textarea.
+
+**** CHAT
+
+Based on the concept of the chatroom while maintaining anonimity and also accepting randomized input. The user can send a message, with a selection between three text colors, but there is no username. The text appears in a randomized position in the chat area, producing something like an optical poem.
+
+**** BROWSE
+
+=UNDER CONSTRUCTION=
+
+The browse section is based on Olia Lialina's "My Boyfriend Came Back from the War". Beginning from selecting one of the existing keywords, the user will start a navigation through the material. Each piece of material will lead to another one with a common keyword using hyperlinks.

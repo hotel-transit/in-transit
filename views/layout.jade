@@ -1,0 +1,43 @@
+doctype strict
+
+html
+  head
+    meta(http-equiv="Content-Type", content="text/html; charset=UTF-8")
+    
+    title in-transit
+    
+    script(src="/socket.io/socket.io.js")
+    script(src="js/jquery-1.11.1.js")
+    script(src="/semantic/dist/semantic.min.js")
+    script(src="js/script.js")
+    script.
+      function init() {
+        document.getElementById('uploadForm').onsubmit = function () {
+          document.getElementById('uploadForm').target = 'upload-target';
+        }
+      }
+      window.onload=init;
+    
+    link(rel="stylesheet", href="css/style.css")
+    link(rel="stylesheet", href="/semantic/dist/semantic.min.css")
+    
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+
+  body
+    #menu.ui.black.inverted.menu.top
+      a.header.item.active(data-tab="home"): h3 hotel transit
+      a.item(data-tab="chat") speak
+      a.item(data-tab="upload") upload
+      a.item(data-tab="browse-files") browse
+      a.item(data-tab="about") about
+      
+    .ui.tab.active(data-tab="home")
+      include home.jade
+    .ui.tab(data-tab="chat")
+      include chat.jade
+    .ui.tab(data-tab="upload")
+      include upload.jade
+    .ui.tab(data-tab="browse-files")
+      include downloads.jade
+    .ui.tab(data-tab="about")
+      include about.jade

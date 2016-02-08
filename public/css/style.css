@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+body, html {
+    font-family: Helvetica, Arial,sans-serif;
+    font-size: 10pt;
+}
+
+#header {
+    position: relative;
+    overflow: auto;
+    width: 100%;
+    min-width: 480px;
+}
+
+#container { 
+    position: relative;
+    width: 100%;
+    min-width: 480px;
+    left: 50%;
+    margin-left: -50%;
+}
+
+.leftdiv {
+    position: absolute;
+    float: left;
+    width: 50%;
+}
+
+.rightdiv {
+    position: relative;
+    float: right;
+    width: 50%;
+}

@@ -1,0 +1,37 @@
+.ui.text.container
+  fieldset
+    legend: h1 Upload
+  
+    form.ui.form#uploadForm(name="uploadForm", action="/upload", enctype="multipart/form-data", method="post", target="upload-target")
+      fieldset
+        input#uploadfile(type="file", name="upload")
+      fieldset
+        legend Write comments:
+        textarea(name="comments", rows="5", cols="30")
+      br
+      fieldset
+        legend
+        .ui.accordion
+          .title
+            i.dropdown.icon
+            | Keywords:
+          .content
+            .ui.grid
+              each key, i in keywords
+                .eight.wide.mobile.four.wide.computer.column
+                  input.ui.checkbox(type="checkbox", name="keywords[]", value=key.keyword)
+                  |  #{key.keyword}
+      fieldset
+        legend Add your own keywords (separated by comas):
+        textarea(name="extraKeywords", rows="0", cols="30")
+        input#id(name="socket", type="hidden")
+        input#author(name="author", type="hidden")
+      input.ui.button.black.medium(type="Submit", value="Upload")
+      #ok.ui.positive.message
+        i.close.icon
+        .header Upload complete.
+      #no.ui.negative.message
+        i.close.icon
+        .header Try again!
+        p Choose a file to upload and/or write a comment!
+      iframe#upload-target(name="upload-target", src="", style="width:0;height:0;border:0px; solid #fff;")

@@ -1,0 +1,24 @@
+.ui.text.container
+  fieldset
+    legend: h1 Speak
+    form(id="chat-form", name="chatForm", action="")
+      fieldset
+        legend Message:
+        .ui.grid.stackable
+          .thirteen.wide.column
+            .ui.input.fluid.tiny
+              input(id="chat-msg", autocomplete="off", placeholder="Message")
+            #radios
+              input(type="radio", name="color", value="black" checked)
+              | <span style="color:black;">B </span>
+              input(type="radio", name="color", value="grey")
+              | <span style="color:grey;">G </span>
+              input(type="radio", name="color", value="maroon")
+              | <span style="color:maroon;">R </span>
+          .three.wide.column
+            input.medium.ui.button.black(type="submit", value="Send")
+      br
+    fieldset
+      legend
+      #messages
+      
