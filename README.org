@@ -2,6 +2,24 @@
 
 Work in progress...
 
+** USAGE
+
+# TIP: IN DEVELOPING, USE SUPERVISOR TO KEEP THE NODE SERVER RUNNING WHILE CHANGING THE CODE: To install: =npm install -g supervisor= and to run the server: =supervisor index.js=
+
+Execute these (in the project folder):
+1. Get npm dependencies:
+=npm install=
+2. Initialize the database:
+=mongod --dbpath database/=
+3. Start an instance of mongo server:
+=mongo=
+4. In the mongo server:
+=use in-transit=
+=db.createCollection("keywords")=
+=db.createCollection("files")=
+
+** PARTS
+
 *** DATABASE
 
 The =in-transit= database contains two collections: =keywords= and =files=
