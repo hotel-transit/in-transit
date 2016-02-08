@@ -131,14 +131,12 @@ io.on('connection', function(socket) {
     var chatStream, content;
     if (pbFunc.existsSync(pbConfig.chatFile)) {
         content = fs.readFileSync(pbConfig.chatFile, 'utf8');
-        console.log("Emitting: ", content);
         socket.emit('display chat', content);
     } else {
         chatStream = fs.createWriteStream(pbConfig.chatFile);
         chatStream.end("<span>Welcome to in-transit</span>", (err) => {
             if (err) console.log("Chat error! =>>> ", err);
             content = fs.readFileSync(pbConfig.chatFile, 'utf8');
-            console.log("Emitting new: ", content);
             socket.emit('display chat', content);
         });
     }

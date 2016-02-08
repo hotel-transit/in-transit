@@ -11,12 +11,10 @@ Execute these (in the project folder):
 =npm install=
 2. Initialize the database:
 =mongod --dbpath database/=
-3. Start an instance of mongo server:
-=mongo=
-4. In the mongo server:
-=use in-transit=
-=db.createCollection("keywords")=
-=db.createCollection("files")=
+3. Restore the database backup:
+=mongorestore --db in-transit database/.db-backup/in-transit/=
+4. When exiting backup the database (if needed):
+=mongodump --db in-transit --out database/.db-backup/=
 
 ** PARTS
 
