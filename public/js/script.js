@@ -69,7 +69,6 @@ jQuery(document).ready(function ($) {
     });
 
     socket.on('display chat', function (msg) {
-        alert("Chat received: " + msg);
         $('#messages').html(msg);
     });
 

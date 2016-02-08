@@ -8,7 +8,7 @@ var jade = require('jade'),
     multer = require('multer'),
     mongo = require('mongodb'),
     monk = require('monk'),
-    db = monk('localhost:27017/secretschool');
+    db = monk('localhost:27017/in-transit');
 
 // Load custom modules
 var pbConfig = require('./pbConfig.js'),
@@ -115,7 +115,12 @@ app.post('/upload', upload.any(), function (req, res, next) {
     // alternative way -- I like better the if condition
     // io.to(req.body.socket).emit('upload ok', feedback);
 
-    // Just end the transmission, maybe render a page here when the upload section runs solo
+    // Redirect to a get request (see below)
+    res.redirect('/dummy');
+});
+
+// This is to avoid the 'resend' prompt in the browser when refreshing after a post request (upload)
+app.get('/dummy', function (req, res) {
     res.end();
 });
 
