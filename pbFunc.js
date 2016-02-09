@@ -59,16 +59,26 @@ exports.str2Array = function (str, sepr) {
 
 // Update keywords collection
 // Reads an array of keywords, a file and a collection. For each keyword, add the keyword in the collection if it does not exist and then add the file in each keyword
-exports.updateKeywords = function (keys, file, collection) {
+exports.updateKeywords = function (keys, file, phrases, collection) {
     if (keys.length != 0) {
         for (var i in keys) {
-            collection.update({keyword: keys[i]}, {keyword: keys[i]}, {upsert: true});
+            collection.update({keyword: keys[i]}, {$set: {keyword: keys[i]}}, {upsert: true});
+            collection.update({keyword: keys[i]}, {$push: {phrases: {$each: phrases}}});
             if (file !== undefined)
                 collection.update({keyword: keys[i]}, {$push: {files: file}});
         }
     }
-    console.log("Update keywords successful!");
+    console.log("Updated keywords data!");
 };
+
+// exports.addKeywords = function (keys, collection) {
+//     if (keys.length != 0) {
+//         for (var i in keys)
+//             collection.update({keyword: keys[i]}, {keyword: keys[i]}, {upsert: true});
+//         console.log("Added new keywords!");
+//     } else
+//         console.log("No keywords to append!");
+// };
 
 // Make a chat entry
 exports.makeEntry = function (color, message) {

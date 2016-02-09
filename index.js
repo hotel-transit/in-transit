@@ -100,19 +100,10 @@ app.post('/upload', upload.any(), function (req, res, next) {
     xtrakeys = pbFunc.str2Array(req.body.extraKeywords, ",");
     keys = keys.concat(xtrakeys);
     console.log("all keywords are: ", keys);
-    
-    // Update keywords
-    if (keys.length != 0) {
-        for (var i in keys) {
-            keywordsCollection.update({keyword: keys[i]}, {keyword: keys[i]}, {upsert: true});
-            if (req.files.length > 0) {
-                keywordsCollection.update({keyword: keys[i]}, {$push: {files: req.files[0].filename}});
-                keywordsCollection.update({keyword: keys[i]}, {$push: {phrases: {$each: phrases}}});
-            }
-        }
-    }
+
+    // Update the keywords collection with the new data
+    pbFunc.updateKeywords(keys, filename, phrases, keywordsCollection);
     console.log("Update keywords successful!");
-    // pbFunc.updateKeywords(keys, filename, keywordsCollection);
 
 // Add an entry in the files collection. If there is no file, filename will be null
     filesCollection.insert({filename: filename, filetype: filetype, keywords: keys, comments: req.body.comments, author: req.body.author});
