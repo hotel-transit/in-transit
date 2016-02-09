@@ -48,8 +48,8 @@ app.use(express.static(__dirname + '/public'));
 
 // Main page
 app.get('/', function (req, res) {
-//    var db = req.db;
-    var keys = req.db.get('keywords'),
+    var db = req.db;
+    var keys = db.get('keywords'),
         sharedfiles = pbFunc.getFileList(pbConfig.uploadFolder);
     
     keys.find({}, {}, function (e, docs) {
@@ -74,9 +74,9 @@ app.post('/upload', upload.any(), function (req, res, next) {
         keys = [],
         xtrakeys = [],
         phrases = [],
-//        db = req.db,
-        keywordsCollection = req.db.get('keywords'),
-        filesCollection = req.db.get('files');
+        db = req.db,
+        keywordsCollection = db.get('keywords'),
+        filesCollection = db.get('files');
         
     // FILE
     if (req.files.length > 0) {
@@ -102,7 +102,17 @@ app.post('/upload', upload.any(), function (req, res, next) {
     console.log("all keywords are: ", keys);
     
     // Update keywords
-    pbFunc.updateKeywords(keys, filename, keywordsCollection);
+    if (keys.length != 0) {
+        for (var i in keys) {
+            keywordsCollection.update({keyword: keys[i]}, {keyword: keys[i]}, {upsert: true});
+            if (req.files.length > 0) {
+                keywordsCollection.update({keyword: keys[i]}, {$push: {files: req.files[0].filename}});
+                keywordsCollection.update({keyword: keys[i]}, {$push: {phrases: {$each: phrases}}});
+            }
+        }
+    }
+    console.log("Update keywords successful!");
+    // pbFunc.updateKeywords(keys, filename, keywordsCollection);
 
 // Add an entry in the files collection. If there is no file, filename will be null
     filesCollection.insert({filename: filename, filetype: filetype, keywords: keys, comments: req.body.comments, author: req.body.author});
