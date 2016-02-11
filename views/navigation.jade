@@ -1,0 +1,9 @@
+.ui.fluid.container
+  .ui.grid
+    .four.wide.column#col01
+      each key in keywords
+        a.keyword(href="", onclick="keyToImg('" + key.keyword + "')") #{key.keyword} 
+        | | 
+    .four.wide.column#col02
+    .four.wide.column#col03
+    .four.wide.column#col04
