@@ -14,6 +14,11 @@ var clearform = function () {
     $('#uploadfile').replaceWith('<input type="file" name="upload" id="uploadfile">');
 };
 
+var keyToImg = function (keyword) {
+    alert(keyword);
+    socket.emit('key to image', keyword);
+};
+
 jQuery(document).ready(function ($) {
     // hide messages and clear the upload form on refresh
     $('.message').addClass("hidden");
@@ -47,6 +52,11 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    // Prevent link to happen
+    $('.keyword').on('click', function(event) {
+        event.preventDefault();
+    });
+
     // close messages
     $('.message .close').on('click', function() {
         $(this).closest('.message').transition('fade');
@@ -70,6 +80,10 @@ jQuery(document).ready(function ($) {
 
     socket.on('display chat', function (msg) {
         $('#messages').html(msg);
+    });
+
+    socket.on('material feedback', function (msg) {
+        alert(msg.file + ": " + msg.phrase);
     });
 
     socket.on('upload ok', function (msg) {

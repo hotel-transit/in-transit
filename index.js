@@ -152,6 +152,27 @@ io.on('connection', function(socket) {
             io.emit('display chat', chat);
         });
     });
+
+    socket.on('key to image', function (msg) {
+        console.log(msg);
+        var keys = db.get('keywords');
+        keys.find({keyword: msg}, {}, function (e, docs) {
+            console.log(docs);
+            var files = docs[0].files;
+            var phrases = docs[0].phrases;
+            console.log("Files length is: ", files.length, "\nPhrases length is: ", phrases.length);
+            var f = Math.floor(Math.random() * (files.length - 1));
+            var p = Math.floor(Math.random() * (phrases.length - 1));
+            var img = files[f];
+            var phr = phrases[p];
+            var msg = {
+                file: img,
+                phrase: phr
+            };
+            io.emit('material feedback', msg);
+        });
+        
+    });
     
     socket.on('disconnect', function() {
         console.log('A client disconnected');
