@@ -12,9 +12,9 @@ Execute these (in the project folder):
 2. Initialize the database:
 =mongod --dbpath database/=
 3. Restore the database backup:
-=mongorestore --db in-transit database/.db-backup/in-transit/=
+=mongorestore --db in-transit .db-backup/in-transit/=
 4. When exiting backup the database (if needed):
-=mongodump --db in-transit --out database/.db-backup/=
+=mongodump --db in-transit --out .db-backup/=
 
 ** PARTS
 

@@ -15,7 +15,6 @@ var clearform = function () {
 };
 
 var keyToImg = function (keyword) {
-    alert(keyword);
     socket.emit('key to image', keyword);
 };
 
@@ -43,7 +42,7 @@ jQuery(document).ready(function ($) {
         // Add the session ID to the form before submission
         $("#id").val("/#" + sessionID);
         // Add the source of the file
-        $("#author").val("just a test user");
+        $("#author").val("Iasonas Pierrakos");
         // If there are no files and no text, prevent submission
         if (x.files.length == 0 && comments == "") {
             event.preventDefault();
@@ -82,8 +81,9 @@ jQuery(document).ready(function ($) {
         $('#messages').html(msg);
     });
 
-    socket.on('material feedback', function (msg) {
-        alert(msg.file + ": " + msg.phrase);
+    socket.on('material', function (msg) {
+        $('#col02').html(msg.file);
+        $('#col03').html(msg.phrase);
     });
 
     socket.on('upload ok', function (msg) {

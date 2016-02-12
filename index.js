@@ -161,15 +161,24 @@ io.on('connection', function(socket) {
             var files = docs[0].files;
             var phrases = docs[0].phrases;
             console.log("Files length is: ", files.length, "\nPhrases length is: ", phrases.length);
-            var f = Math.floor(Math.random() * (files.length - 1));
-            var p = Math.floor(Math.random() * (phrases.length - 1));
-            var img = files[f];
-            var phr = phrases[p];
+            if (files.length != 0) {
+                var f = Math.floor(Math.random() * (files.length - 1));
+                var img = files[f];
+            } else {
+                img = "same";
+            }
+            if (phrases.length != 0) {
+                var p = Math.floor(Math.random() * (phrases.length - 1));
+                var phr = phrases[p];
+            } else {
+                phr = docs[0].keyword;
+            }
             var msg = {
                 file: img,
                 phrase: phr
             };
-            io.emit('material feedback', msg);
+            console.log(msg);
+            io.emit('material', msg);
         });
         
     });
