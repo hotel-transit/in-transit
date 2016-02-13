@@ -155,6 +155,7 @@ io.on('connection', function(socket) {
 
     socket.on('key to image', function (msg) {
         console.log(msg);
+        console.log("About to send to: ", socket.id);
         var keys = db.get('keywords');
         keys.find({keyword: msg}, {}, function (e, docs) {
             console.log(docs);
@@ -179,7 +180,10 @@ io.on('connection', function(socket) {
                 key: docs[0].keyword
             };
             console.log(msg);
-            io.emit('material', msg);
+            if (io.sockets.connected[socket.id]) {
+                io.sockets.connected[socket.id].emit('material', msg);
+            }
+//            io.emit('material', msg);
         });
         
     });
