@@ -175,7 +175,8 @@ io.on('connection', function(socket) {
             }
             var msg = {
                 file: img,
-                phrase: phr
+                phrase: phr,
+                key: docs[0].keyword
             };
             console.log(msg);
             io.emit('material', msg);

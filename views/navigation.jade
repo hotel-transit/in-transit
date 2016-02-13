@@ -1,16 +1,17 @@
 .ui.fluid.container
-  .ui.grid
+  .ui.grid.stackable
     .four.wide.column
-      #col01
+      #dv1
         each key in keywords
           a.keyword(href="", onclick="keyToImg('" + key.keyword + "')") #{key.keyword} 
           | | 
+      #dv2
     .four.wide.column
-      #col02
-        p This is the content
+      #dv3
+      #dv4
     .four.wide.column
-      #col03
-        p this is also the content
+      #dv5
+      #dv6
     .four.wide.column
-      #col04
-        p This is another content
+      #dv7
+      #dv8

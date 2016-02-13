@@ -82,8 +82,15 @@ jQuery(document).ready(function ($) {
     });
 
     socket.on('material', function (msg) {
-        $('#col02').html(msg.file);
-        $('#col03').html(msg.phrase);
+        var nr1, nr2;
+        nr1 = Math.floor(Math.random() * 5) + 3;
+        do {
+            nr2 = Math.floor(Math.random() * 5) + 3;
+        } while (nr2 == nr1)
+       
+        $('#dv'+ nr1).html("<img style='max-width:100%;max-height:100%' src='/user-uploads/"+ msg.file +"' />");
+        $('#dv'+ nr2).html(msg.phrase);
+//        $('#dv4').html(msg.key);
     });
 
     socket.on('upload ok', function (msg) {
