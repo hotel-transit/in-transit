@@ -38,7 +38,7 @@ exports.rename = function (n) {
     else
         name = n + "-" + date;
     return name;
-}
+};
 
 // Make an array out of a string
 exports.str2Array = function (str, sepr) {
@@ -70,15 +70,6 @@ exports.updateKeywords = function (keys, file, phrases, collection) {
     }
     console.log("Updated keywords data!");
 };
-
-// exports.addKeywords = function (keys, collection) {
-//     if (keys.length != 0) {
-//         for (var i in keys)
-//             collection.update({keyword: keys[i]}, {keyword: keys[i]}, {upsert: true});
-//         console.log("Added new keywords!");
-//     } else
-//         console.log("No keywords to append!");
-// };
 
 // Make a chat entry
 exports.makeEntry = function (color, message) {

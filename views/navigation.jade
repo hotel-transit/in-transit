@@ -1,17 +1,24 @@
 .ui.fluid.container
-  .ui.grid.stackable
-    .four.wide.column
-      #dv1
-        each key in keywords
-          a.keyword(href="", onclick="keyToImg('" + key.keyword + "')") #{key.keyword} 
-          | | 
-      #dv2
-    .four.wide.column
-      #dv3
-      #dv4
-    .four.wide.column
-      #dv5
-      #dv6
-    .four.wide.column
-      #dv7
-      #dv8
+  .ui.four.column.grid.stackable
+    .four.column.row
+      .column
+        .navdiv#dv1
+          .navcontent(style="font-size:inherit;text-align:left;")
+            each key in keywords
+              a.keyword(href="", onclick="keyToImg('" + key.keyword + "')") #{key.keyword} 
+              | | 
+      .column
+        .navdiv#dv3
+      .column
+        .navdiv#dv5
+      .column
+        .navdiv#dv7
+    .four.column.row
+      .column
+        .navdiv#dv2
+      .column
+        .navdiv#dv4
+      .column
+        .navdiv#dv6
+      .column
+        .navdiv#dv8

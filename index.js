@@ -11,8 +11,8 @@ var jade = require('jade'),
     db = monk('localhost:27017/in-transit');
 
 // Load custom modules
-var pbConfig = require('./pbConfig.js'),
-    pbFunc = require('./pbFunc.js');
+var pbConfig = require('./custom_modules/pbConfig.js'),
+    pbFunc = require('./custom_modules/pbFunc.js');
 
 // Define template engine
 app.set('views', __dirname + '/views');
