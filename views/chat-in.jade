@@ -1,0 +1,22 @@
+//- log input form -- title: log input
+
+include includes/header.jade
+
+body
+  #main.ui.text.container
+    h3 If you were forced to leave your home, what is the one thing that you would take with you?
+    hr
+    #formdiv(style="padding:1%;")
+      form.ui.form#chat-form(name="chatForm", action="/upload2", enctype="multipart/form-data", method="post")
+        input#chat-msg(name="msg", style="width:100%;", autocomplete="off", placeholder="Message")
+        #radios
+          input(type="radio", name="color", value="black" checked)
+          | <span style="color:black;">B </span>
+          input(type="radio", name="color", value="grey")
+          | <span style="color:grey;">G </span>
+          input(type="radio", name="color", value="maroon")
+          | <span style="color:maroon;">R </span>
+        | Show a picture:
+        br
+        input#file-upload(name="upload", type="file", accept="image/jpeg,image/png,image/gif")
+        input.small.ui.button.black(type="submit", value="Send")

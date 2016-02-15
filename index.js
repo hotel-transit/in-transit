@@ -42,6 +42,8 @@ var upload = multer({
     storage: storage
 });
 
+var upload2 = multer({ dest: process.cwd() + '/user-uploads-fromchat' });
+
 app.use(express.static(__dirname + '/public'));
 
 // Request handlers
@@ -57,11 +59,49 @@ app.get('/', function (req, res) {
     });
 });
 
+app.get('/log-input', function (req, res) {
+    res.render('chat-in.jade', {title: 'log input'});
+});
+
+app.get('/log-output', function (req, res) {
+    res.render('chat-out.jade', {title: 'log output'});
+});
+
 // Download file request
 app.get("/user-uploads*", function (req, res) {
     var file = unescape(req.path);
     console.log("Downloading: " + file);
     res.download(process.cwd() + file);
+});
+
+app.post('/upload2', upload2.any(), function (req, res) {
+    console.log("Uploading...\nFiles: ", req.files, "\nBody: ", req.body);
+    var image = "",
+        message = "",
+        color = "";
+
+    if (req.files.length > 0) {
+        image = req.files[0].filename;
+    }
+    console.log("Filename is: ", image);
+    message = req.body.msg;
+    color = req.body.color;
+    console.log("Color is: ", color, "\nMessage is: ", message);
+    // Function to create entry
+    var c = fs.readFileSync(pbConfig.chatFile, 'utf8');
+    if (message != "") {
+        message = pbFunc.makeEntry(color, message);
+    }
+    if (image != "") {
+        message += pbFunc.makeEntry(color, "<img style='width:25%' src='/user-uploads-fromchat/" + image + "' />");
+    }
+    var chatStream = fs.createWriteStream(pbConfig.chatFile);
+    chatStream.end(message + c, (err) => {
+        if (err) throw err;
+        var chat = fs.readFileSync(pbConfig.chatFile, 'utf8');
+        io.emit('display chat', chat);
+    });
+    res.redirect('/log-input');
 });
 
 // Upload functionality
@@ -135,7 +175,7 @@ io.on('connection', function(socket) {
         socket.emit('display chat', content);
     } else {
         chatStream = fs.createWriteStream(pbConfig.chatFile);
-        chatStream.end("<span>Welcome to in-transit</span>", (err) => {
+        chatStream.end("<span style='margin-left:40%;'>Welcome to in-transit</span>", (err) => {
             if (err) console.log("Chat error! =>>> ", err);
             content = fs.readFileSync(pbConfig.chatFile, 'utf8');
             socket.emit('display chat', content);
@@ -183,7 +223,6 @@ io.on('connection', function(socket) {
             if (io.sockets.connected[socket.id]) {
                 io.sockets.connected[socket.id].emit('material', msg);
             }
-//            io.emit('material', msg);
         });
         
     });

@@ -12,6 +12,8 @@ var clearform = function () {
     $('#id').val('');
     $('#author').val('');
     $('#uploadfile').replaceWith('<input type="file" name="upload" id="uploadfile">');
+    $('#file-upload').replaceWith('<input type="file" name="upload" id="file-upload" accept="image/jpeg,image/png,image/gif">');
+    
 };
 
 var keyToImg = function (keyword) {
@@ -51,7 +53,18 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    // Prevent link to happen
+    // chat form
+    $('#chat-form').submit(function (event) {
+        var x = document.getElementById("file-upload");
+        var s = $(this).serializeArray();
+        var msg = s[0].value;
+        var clr = s[1].value;
+        if (x.files.length == 0 && msg == "") {
+            event.preventDefault();
+        }
+    });
+
+    // Prevent link to happen on navigation
     $('.keyword').on('click', function(event) {
         event.preventDefault();
     });
@@ -62,16 +75,16 @@ jQuery(document).ready(function ($) {
     });
     
     // chat functions
-    $('#chat-form').submit(function () {
-        if ($('#chat-msg').val() != "") {
-            var chatEntry = { message: $('#chat-msg').val(),
-                              color: $("input[type='radio'][name='color']:checked").val()
-                            };
-            socket.emit('chat message', chatEntry);
-            $('#chat-msg').val('');
-        }
-        return false;
-    });
+    // $('#chat-form').submit(function () {
+    //     if ($('#chat-msg').val() != "") {
+    //         var chatEntry = { message: $('#chat-msg').val(),
+    //                           color: $("input[type='radio'][name='color']:checked").val()
+    //                         };
+    //         socket.emit('chat message', chatEntry);
+    //         $('#chat-msg').val('');
+    //     }
+    //     return false;
+    // });
 
     socket.on('chat init', function (msg) {
         $('#messages').html(msg);

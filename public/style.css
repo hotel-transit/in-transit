@@ -1,6 +1,10 @@
-body {
-    background-color: black;
-    color: grey;
+#main {
+    background-color: white;
+    min-height: 100%;
+}
+
+h3 {
+    text-align: center;
 }
 
 .navdiv {
