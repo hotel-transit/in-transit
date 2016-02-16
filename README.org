@@ -16,7 +16,21 @@ Execute these (in the project folder):
 4. When exiting backup the database (if needed):
 =mongodump --db in-transit --out .db-backup/=
 
+The server uses the port =2030=.
+
 ** PARTS
+
+*** CHAT (LOGBOOK)
+
+The chat-room is split in two pieces: input and output.
+
+The input consists only of the form: message input, color selection (optional) and file upload (only jpeg, png, gif).
+
+It runs in: =<server>/log-input=
+
+The output is the chat text.
+
+It runs in =<server>/log-output=
 
 *** DATABASE
 
