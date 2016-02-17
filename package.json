@@ -39,7 +39,7 @@
     "gulp-watch": "^4.3.5",
     "jade": "^1.11.0",
     "map-stream": "0.0.6",
-    "mongodb": "^2.1.4",
+    "mongodb": "^1.4.40",
     "monk": "^1.0.1",
     "multer": "^1.1.0",
     "require-dot-file": "^0.4.0",
